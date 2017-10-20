@@ -24,7 +24,7 @@ RUN apt-get update \
 # nodejs ###############################################################################################################
     && curl -sL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash \
     && apt-get install -y nodejs \
-    && npm install -g bower gulp phantomjs-prebuilt@"^2.1.13" \
+    && npm install -g --unsafe-perm bower gulp phantomjs-prebuilt \
 
 # golang ###############################################################################################################
     && curl -fsSL "https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz" -o golang.tar.gz \

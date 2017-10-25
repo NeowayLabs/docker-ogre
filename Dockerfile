@@ -8,7 +8,7 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 ENV BUILD_PACKAGES "apt-transport-https python-pip"
-ENV RUNTIME_PACKAGES "curl build-essential ca-certificates fontconfig"
+ENV RUNTIME_PACKAGES "git curl build-essential ca-certificates fontconfig"
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUNTIME_PACKAGES \

@@ -2,13 +2,13 @@ FROM debian:stretch
 
 ENV DOCKER_VERSION 17.12.0~ce-0~debian
 ENV NODEJS_VERSION 8.x
-ENV GOLANG_VERSION 1.10.0
+ENV GOLANG_VERSION 1.10
 ENV GOLANG_CHECKSUM b5a64335f1490277b585832d1f6c7f8c6c11206cba5cd3f771dcb87b98ad1a33
 
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
-ENV BUILD_PACKAGES "apt-transport-https python-pip gnupg2 software-properties-common"
+ENV BUILD_PACKAGES "apt-transport-https python-pip python-setuptools gnupg2 software-properties-common"
 ENV RUNTIME_PACKAGES "git curl build-essential ca-certificates fontconfig ruby-compass"
 
 RUN apt-get update \
@@ -21,7 +21,7 @@ RUN apt-get update \
         stable" \
     && apt-get update \
     && apt-get install -y --no-install-recommends docker-ce=$DOCKER_VERSION \
-    && pip install docker-compose \
+    && pip install docker-compose --force --upgrade \
     && curl -sL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash \
     && apt-get install -y --no-install-recommends nodejs \
     && npm install -g --unsafe-perm bower gulp phantomjs-prebuilt \

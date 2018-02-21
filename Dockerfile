@@ -13,12 +13,12 @@ ENV RUNTIME_PACKAGES "git curl build-essential ca-certificates fontconfig ruby-c
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUNTIME_PACKAGES \
-    && curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add -
-    && apt-key fingerprint 0EBFCD88
+    && curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - \
+    && apt-key fingerprint 0EBFCD88 \
     && add-apt-repository \
         "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
         $(lsb_release -cs) \
-        stable"
+        stable" \
     && apt-get update \
     && apt-get install -y --no-install-recommends docker-ce=$DOCKER_VERSION \
     && pip install docker-compose \

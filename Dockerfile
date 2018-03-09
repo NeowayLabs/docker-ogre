@@ -19,11 +19,13 @@ RUN apt-get update \
         "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
         $(lsb_release -cs) \
         stable" \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends docker-ce=$DOCKER_VERSION \
     && pip install docker-compose --force --upgrade \
     && curl -sL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash \
-    && apt-get install -y --no-install-recommends nodejs \
+    && apt-get install -y --no-install-recommends nodejs yarn \
     && npm install -g --unsafe-perm bower gulp phantomjs-prebuilt \
     && curl -fsSL "https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz" -o golang.tar.gz \
     && echo "$GOLANG_CHECKSUM golang.tar.gz" | sha256sum -c - \

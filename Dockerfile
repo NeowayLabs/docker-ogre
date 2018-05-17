@@ -1,7 +1,7 @@
 FROM debian:stretch
 
 ENV DOCKER_VERSION 17.12.0~ce-0~debian
-ENV NODEJS_VERSION 8.x
+ENV NODEJS_VERSION 10.x
 ENV GOLANG_VERSION 1.10
 ENV GOLANG_CHECKSUM b5a64335f1490277b585832d1f6c7f8c6c11206cba5cd3f771dcb87b98ad1a33
 
@@ -35,3 +35,6 @@ RUN apt-get update \
     && chmod -R 777 "$GOPATH" \
     && apt-get remove --purge -y $BUILD_PACKAGES \
     && rm -rf /var/lib/apt/lists/*
+
+# Upgrade npm
+RUN npm -g install npm

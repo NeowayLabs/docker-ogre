@@ -13,6 +13,8 @@ ENV RUNTIME_PACKAGES "git curl build-essential ca-certificates fontconfig ruby-c
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUNTIME_PACKAGES \
+    && curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
     && curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - \
     && apt-key fingerprint 0EBFCD88 \
     && add-apt-repository \
@@ -22,6 +24,7 @@ RUN apt-get update \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
+    && apt-get install -y --no-install-recommends google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont \
     && apt-get install -y --no-install-recommends docker-ce=$DOCKER_VERSION \
     && pip install docker-compose --force --upgrade \
     && curl -sL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash \
@@ -38,3 +41,4 @@ RUN apt-get update \
 
 # Upgrade npm
 RUN npm -g install npm
+

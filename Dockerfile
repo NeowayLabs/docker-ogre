@@ -37,8 +37,10 @@ RUN apt-get update \
     && mkdir -p "$GOPATH/src" "$GOPATH/bin" \
     && chmod -R 777 "$GOPATH" \
     && apt-get remove --purge -y $BUILD_PACKAGES \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && go get -u gopkg.in/alecthomas/gometalinter.v2 \
+    && gometalinter.v2 --install
+
 
 # Upgrade npm
 RUN npm -g install npm
-

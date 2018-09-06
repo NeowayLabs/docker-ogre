@@ -29,8 +29,7 @@ RUN apt-get update \
     && pip install docker-compose --force --upgrade \
     && curl -sL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash \
     && apt-get install -y --no-install-recommends nodejs yarn \
-    && npm install -g --unsafe-perm bower gulp phantomjs-prebuilt \
-    && npm install -g eslint \
+    && npm install -g --unsafe-perm bower gulp phantomjs-prebuilt eslint \
     && curl -fsSL "https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz" -o golang.tar.gz \
     && echo "$GOLANG_CHECKSUM golang.tar.gz" | sha256sum -c - \
     && tar -C /usr/local -xzf golang.tar.gz \

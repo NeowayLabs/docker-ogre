@@ -9,7 +9,9 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 ENV BUILD_PACKAGES "apt-transport-https python-pip python-setuptools gnupg2 software-properties-common"
-ENV RUNTIME_PACKAGES "git mercurial curl build-essential ca-certificates fontconfig ruby-compass acbuild"
+ENV RUNTIME_PACKAGES "git mercurial curl build-essential ca-certificates fontconfig ruby-compass"
+ENV ACBUILD_VERSION 0.4.0
+ENV ACBUILD_FILE acbuild-v$ACBUILD_VERSION.tar.gz
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUNTIME_PACKAGES \
@@ -44,3 +46,6 @@ RUN apt-get update \
 
 # Upgrade npm
 RUN npm -g install npm
+
+# Get acbuild
+RUN curl -L https://github.com/containers/build/releases/download/v$ACBUILD_VERSION/$ACBUILD_FILE | tar xz -C /usr/bin --strip-components=1

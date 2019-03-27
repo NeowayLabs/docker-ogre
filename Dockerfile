@@ -9,7 +9,7 @@ ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 ENV BUILD_PACKAGES "apt-transport-https python-pip python-setuptools gnupg2 software-properties-common"
-ENV RUNTIME_PACKAGES "git mercurial curl build-essential ca-certificates fontconfig ruby-compass"
+ENV RUNTIME_PACKAGES "git mercurial curl build-essential ca-certificates fontconfig ruby-compass acbuild"
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends $BUILD_PACKAGES $RUNTIME_PACKAGES \
